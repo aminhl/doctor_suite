@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.nexthope</groupId>
     <artifactId>DoctorSuite</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>DoctorSuite</name>
     <description>DoctorSuite</description>
     <url/>

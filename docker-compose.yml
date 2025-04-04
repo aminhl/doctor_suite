@@ -22,7 +22,7 @@ services:
     ports:
       - 9090:8080
     networks:
-      - nova_care
+      - doctor_suite
     command:
       - "start-dev"
 volumes:
