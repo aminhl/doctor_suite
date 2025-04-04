@@ -3,16 +3,16 @@ services:
     image: postgres
     container_name: postgres_ds
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-      PG_DATA: ${PG_DATA}
+      POSTGRES_USER: ${DS_DB_USER}
+      POSTGRES_PASSWORD: ${DS_DB_PASSWORD}
+      POSTGRES_DB: ${DS_DB_SCHEMA}
+      PG_DATA: ${DS_DB_DATA}
     ports:
       - "5432:5432"
     volumes:
-      - postgres:/data/postgres
+      - doctor_suite_volume:/data/postgres
     networks:
-      - doctor_suite
+      - doctor_suite_network
   keycloak:
     image: quay.io/keycloak/keycloak
     container_name: keycloak_ds
@@ -20,14 +20,16 @@ services:
       KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
     ports:
-      - 9090:8080
+      - "9090:8080"
     networks:
-      - doctor_suite
+      - doctor_suite_network
     command:
       - "start-dev"
 volumes:
-  postgres:
+  doctor_suite_volume:
+    name: doctor_suite_volume
     driver: local
 networks:
-  doctor_suite:
+  doctor_suite_network:
+    name: doctor_suite_network
     driver: bridge
