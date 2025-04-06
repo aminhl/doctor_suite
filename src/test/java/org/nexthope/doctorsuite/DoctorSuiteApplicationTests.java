@@ -2,11 +2,12 @@ package org.nexthope.doctorsuite;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.context.ApplicationContext;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class DoctorSuiteApplicationTests {
 
     @Mock
