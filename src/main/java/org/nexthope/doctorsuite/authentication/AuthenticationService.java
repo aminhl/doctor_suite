@@ -7,10 +7,13 @@ import org.apache.http.HttpStatus;
 import org.keycloak.admin.client.CreatedResponseUtil;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.representations.idm.CredentialRepresentation;
+import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.nexthope.doctorsuite.keycloak.KeycloakUserDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -41,6 +44,11 @@ public class AuthenticationService {
 
         String createdUserId = CreatedResponseUtil.getCreatedId(keycloakResponse);
         log.info("User {} created successfully", keycloakUserDto.username());
+
+        final String role = keycloakUserDto.role().name();
+        RoleRepresentation roleRepresentation = keycloak.realm(realm).roles().get(role).toRepresentation();
+        keycloak.realm(realm).users().get(createdUserId).roles().realmLevel().add(List.of(roleRepresentation));
+        log.info("Role set successfully for user: {}", keycloakUserDto.username());
 
         CredentialRepresentation credential = new CredentialRepresentation();
         credential.setType(CredentialRepresentation.PASSWORD);
