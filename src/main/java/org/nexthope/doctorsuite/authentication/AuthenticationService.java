@@ -22,9 +22,8 @@ public class AuthenticationService {
 
     private final Keycloak keycloak;
 
-
     public void registerUser(KeycloakUserDto keycloakUserDto) {
-        log.info("Starting registration for user: ${}", keycloakUserDto.username());
+        log.info("Starting registration for user: {}", keycloakUserDto.username());
         UserRepresentation user = new UserRepresentation();
         user.setUsername(keycloakUserDto.username());
         user.setEmail(keycloakUserDto.email());
