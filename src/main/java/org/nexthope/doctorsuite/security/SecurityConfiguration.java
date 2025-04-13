@@ -22,6 +22,7 @@ public class SecurityConfiguration {
                 .cors(withDefaults())
                 .authorizeHttpRequests(
                         req -> req.requestMatchers(
+                        "/api/v1/auth/**",
                         "/v3/api-docs",
                         "/v3/api-docs/**",
                         "/swagger-resources",
